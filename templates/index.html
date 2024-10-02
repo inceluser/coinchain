@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Token Sale</title>
+</head>
+<body>
+    <h1>Current Token Price: <span id="token-price">{{ price }}</span> BTC</h1>
+    
+    <h2>Last Token Purchased by Wallet:</h2>
+    <p id="wallet-address">{{ wallet_address }}</p>
+
+    <script>
+        function updateData() {
+            fetch('/update')
+                .then(response => response.json())
+                .then(data => {
+                    document.getElementById('token-price').innerText = data.price.toFixed(8);
+                    document.getElementById('wallet-address').innerText = data.wallet_address;
+                })
+                .catch(error => console.error('Error fetching data:', error));
+        }
+
+        // Обновление данных каждые 5 секунд
+        setInterval(updateData, 5000);
+    </script>
+</body>
+</html>
