@@ -1,0 +1,21 @@
+{
+  "$schema": "https://vercel.com/docs/projects/project-configuration",
+  "version": 2,
+  "builds": [
+    {
+      "src": "app.py",
+      "use": "@vercel/python",
+      "config": {
+        "maxLambdaSize": "50mb",
+        "maxDuration": 60
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "app.py"
+    }
+  ],
+  "installCommand": "apt-get update && apt-get install -y ffmpeg"
+}
